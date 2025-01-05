@@ -1,4 +1,5 @@
 using BlogApi.Context;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace BlogApi
 {
@@ -27,13 +28,7 @@ namespace BlogApi
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-
-                   
-                    c.RoutePrefix = string.Empty;  
-                });
+                app.UseSwaggerUI();
             }
 
       
