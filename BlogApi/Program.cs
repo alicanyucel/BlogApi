@@ -1,3 +1,5 @@
+using BlogApi.Context;
+
 namespace BlogApi
 {
     public class Program
@@ -9,8 +11,15 @@ namespace BlogApi
            
             builder.Services.AddControllers();
 
-          
+            builder.Services.AddSqlServer<NewsletterDb>(builder.Configuration.GetConnectionString("SqlServer"));
             builder.Services.AddSwaggerGen();
+            builder.Services.AddCors(opt =>
+            {
+                opt.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                });
+            });
 
             var app = builder.Build();
             // swagger üzerinden ayaða kaldýrma https://localhost:7272/index.html
