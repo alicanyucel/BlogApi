@@ -33,6 +33,7 @@ namespace BlogApi
 
       
             app.UseHttpsRedirection();
+            app.UseCors();
             app.UseAuthorization();
 
            

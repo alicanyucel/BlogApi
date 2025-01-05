@@ -29,6 +29,7 @@ public class NewsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Post(Newsletter newsletter)
     {
+        newsletter.CreatedDate = DateTime.Now;
         await _context.Newsletter.AddAsync(newsletter);
         await _context.SaveChangesAsync();
         return Ok("Haber kaydı yapıldı");
