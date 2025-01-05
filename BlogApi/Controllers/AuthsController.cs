@@ -1,6 +1,7 @@
 ﻿using BlogApi.Context;
 using BlogApi.Dtos;
 using BlogApi.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,6 +41,26 @@ namespace BlogApi.Controllers
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync(); // save 
             return Ok("Kayıt işlemi başarılı");
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginDto loginDto)
+        {
+            var user = await _context.Users.Where(p => p.UserName == loginDto.UserName && p.Password == loginDto.Password).FirstOrDefaultAsync();
+            if (user == null)
+                user = await _context.Users.Where(p => p.Email == loginDto.UserName).FirstOrDefaultAsync();
+            if (user == null)
+            {
+                return BadRequest("kullanıcı ya da email adresi bulunamadı");
+            }
+            if (user.Password == loginDto.Password)
+            {
+                return Ok("kullanıcı girişi başarılı");
+
+            }
+            else
+            {
+                return BadRequest("sifreyi yanlış girdiniz");
+            }
         }
     }
 }
