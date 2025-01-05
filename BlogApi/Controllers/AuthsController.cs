@@ -1,7 +1,6 @@
 ﻿using BlogApi.Context;
 using BlogApi.Dtos;
 using BlogApi.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
