@@ -17,13 +17,13 @@ public class NewsController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        var result = await _context.Users.ToListAsync();
+        var result = await _context.Newsletter.ToListAsync();
         return Ok(result);
     }
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id)
     {
-        var result=await _context.Users.FindAsync(id);
+        var result=await _context.Newsletter.FindAsync(id);
         return Ok(result);
     }
     [HttpPost]
