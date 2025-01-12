@@ -54,7 +54,7 @@ namespace BlogApi.Controllers
             }
             if (user.Password == loginDto.Password)
             {
-                return Ok("kullanıcı girişi başarılı");
+                return Ok(user);
 
             }
             else
