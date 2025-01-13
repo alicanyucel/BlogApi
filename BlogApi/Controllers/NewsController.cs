@@ -32,14 +32,22 @@ public class NewsController : ControllerBase
         newsletter.CreatedDate = DateTime.Now;
         await _context.Newsletter.AddAsync(newsletter);
         await _context.SaveChangesAsync();
-        return Ok("Haber kaydı yapıldı");
+        var results = new ResultModel()
+        {
+            Message = "ekleme işlemi başarılı"
+        };
+        return Ok(results);
     }
     [HttpPut]
     public async Task<IActionResult> Put(Newsletter newsletter)
     {
         _context.Newsletter.Update(newsletter);
         await _context.SaveChangesAsync();
-        return Ok("haber güncellendi");
+        var result = new ResultModel()
+        {
+            Message = "guncelleme işlemi nbaşarılı"
+        };
+        return Ok(result);
     }
     [HttpDelete]
     public async Task<IActionResult> Delete(int id)
@@ -47,7 +55,11 @@ public class NewsController : ControllerBase
         var result=await _context.Newsletter.FindAsync(id);
         _context.Newsletter.Remove(result);
         await _context.SaveChangesAsync();
-        return Ok("haber silindi");
+        var resul = new ResultModel()
+        {
+            Message = "silme işlemi nbaşarılı"
+        };
+        return Ok(result);
 
     }
 }
