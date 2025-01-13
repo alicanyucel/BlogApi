@@ -1,5 +1,4 @@
 using BlogApi.Context;
-using Microsoft.AspNetCore.Rewrite;
 
 namespace BlogApi
 {

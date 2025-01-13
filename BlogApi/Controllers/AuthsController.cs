@@ -39,7 +39,12 @@ namespace BlogApi.Controllers
             };
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync(); // save 
-            return Ok("Kayıt işlemi başarılı");
+            ResultModel result = new()
+            {
+                Message = "Register user is successful!"
+            };
+
+            return Ok(result);
         }
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto loginDto)
