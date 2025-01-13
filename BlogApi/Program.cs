@@ -13,13 +13,16 @@ namespace BlogApi
 
             builder.Services.AddSqlServer<NewsletterDb>(builder.Configuration.GetConnectionString("SqlServer"));
             builder.Services.AddSwaggerGen();
-            builder.Services.AddCors(opt =>
+            builder.Services.AddCors(options =>
             {
-                opt.AddDefaultPolicy(builder =>
+                options.AddPolicy("AllowSpecificOrigin", policy =>
                 {
-                    builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                    policy.WithOrigins("http://localhost:58360") 
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
                 });
             });
+
 
             var app = builder.Build();
             // swagger üzerinden ayaða kaldýrma https://localhost:7272/index.html
@@ -30,9 +33,9 @@ namespace BlogApi
                 app.UseSwaggerUI();
             }
 
-      
+            app.UseCors("AllowSpecificOrigin");
             app.UseHttpsRedirection();
-            app.UseCors();
+           
             app.UseAuthorization();
 
            
